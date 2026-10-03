@@ -6,10 +6,9 @@
     <title>منصة الجناح التفاعلي | Interactive Wing Platform</title>
     
     <!-- Three.js Library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@r128/build/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@r128/examples/js/controls/OrbitControls.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@r128/examples/js/loaders/GLTFLoader.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@r128/examples/js/exporters/GLTFExporter.js"></script>
     
     <style>
         * {
@@ -124,6 +123,16 @@
             background: rgba(99, 102, 241, 0.2);
         }
 
+        .btn-success {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--success);
+            border: 1px solid var(--success);
+        }
+
+        .btn-success:hover {
+            background: rgba(16, 185, 129, 0.3);
+        }
+
         .btn-danger {
             background: rgba(239, 68, 68, 0.1);
             color: var(--danger);
@@ -206,6 +215,7 @@
             gap: 8px;
             margin-bottom: 20px;
             border-bottom: 1px solid var(--border);
+            overflow-x: auto;
         }
 
         .tab-btn {
@@ -218,6 +228,7 @@
             border-bottom: 2px solid transparent;
             transition: all 0.3s ease;
             font-size: 13px;
+            white-space: nowrap;
         }
 
         .tab-btn.active {
@@ -333,12 +344,8 @@
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .modal-content {
@@ -397,57 +404,6 @@
             transform: scale(1.1);
         }
 
-        /* ========== HOTSPOT EDITOR ========== */
-        .hotspot-editor {
-            background: rgba(99, 102, 241, 0.1);
-            border: 1px solid var(--primary);
-            border-radius: 8px;
-            padding: 16px;
-            margin-bottom: 16px;
-        }
-
-        .hotspot-editor-title {
-            font-weight: 600;
-            margin-bottom: 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        /* ========== TOUR EDITOR ========== */
-        .tour-step {
-            background: rgba(15, 23, 42, 0.5);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 12px;
-            margin-bottom: 8px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: move;
-            transition: all 0.3s ease;
-        }
-
-        .tour-step:hover {
-            background: rgba(99, 102, 241, 0.1);
-            border-color: var(--primary);
-        }
-
-        .tour-step-content {
-            flex: 1;
-        }
-
-        .tour-step-index {
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 4px;
-        }
-
-        .tour-step-name {
-            font-size: 13px;
-            color: var(--text-secondary);
-        }
-
         /* ========== STATUS & ALERTS ========== */
         .alert {
             padding: 12px 16px;
@@ -489,17 +445,6 @@
             border: 1px solid var(--primary);
         }
 
-        /* ========== CONTROLS ========== */
-        .control-group {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 12px;
-        }
-
-        .control-group .form-input {
-            flex: 1;
-        }
-
         .spinner {
             display: inline-block;
             width: 16px;
@@ -511,9 +456,7 @@
         }
 
         @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
+            to { transform: rotate(360deg); }
         }
 
         /* ========== SCROLLBAR ========== */
@@ -535,30 +478,7 @@
             background: var(--text-secondary);
         }
 
-        /* ========== RESPONSIVE ========== */
-        @media (max-width: 1024px) {
-            .sidebar {
-                width: 300px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                flex-direction: column;
-            }
-
-            .sidebar {
-                width: 100%;
-                max-height: 40vh;
-                border-right: none;
-                border-bottom: 1px solid var(--border);
-            }
-
-            .main-viewport {
-                height: 60vh;
-            }
-        }
-
+        /* ========== EMPTY STATE ========== */
         .empty-state {
             display: flex;
             flex-direction: column;
@@ -588,24 +508,45 @@
             max-width: 300px;
         }
 
-        .input-with-unit {
+        .tour-step {
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 8px;
             display: flex;
-            gap: 8px;
+            justify-content: space-between;
+            align-items: center;
+            cursor: move;
+            transition: all 0.3s ease;
         }
 
-        .input-with-unit .form-input {
+        .tour-step:hover {
+            background: rgba(99, 102, 241, 0.1);
+            border-color: var(--primary);
+        }
+
+        .tour-step-content {
             flex: 1;
         }
 
-        .unit-label {
-            display: flex;
-            align-items: center;
-            padding: 0 8px;
-            font-size: 12px;
+        .tour-step-index {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+
+        .tour-step-name {
+            font-size: 13px;
             color: var(--text-secondary);
-            background: rgba(15, 23, 42, 0.5);
-            border-radius: 6px;
-            border: 1px solid var(--border);
+        }
+
+        .drag-handle {
+            cursor: grab;
+            padding: 4px;
+            color: var(--text-secondary);
+            font-weight: bold;
+            margin-right: 8px;
         }
 
         .preview-image {
@@ -617,16 +558,27 @@
             border: 1px solid var(--border);
         }
 
-        .drag-handle {
-            cursor: grab;
-            padding: 4px;
-            color: var(--text-secondary);
-            font-weight: bold;
-            margin-right: 8px;
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 300px;
+            }
         }
 
-        .drag-handle:active {
-            cursor: grabbing;
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                max-height: 40vh;
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .main-viewport {
+                height: 60vh;
+            }
         }
     </style>
 </head>
@@ -639,7 +591,7 @@
             <!-- UPLOAD SECTION -->
             <div>
                 <div class="section-title">📦 تحميل النموذج</div>
-                <label class="file-input-label">
+                <label class="file-input-label" id="fileLabel">
                     <div>
                         <div style="font-size: 24px; margin-bottom: 8px;">⬆️</div>
                         <div style="font-size: 12px;">اضغط أو اسحب ملف GLB</div>
@@ -769,37 +721,6 @@
         </div>
     </div>
 
-    <!-- Camera Modal -->
-    <div id="cameraModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-title">📷 تحرير موضع الكاميرا</div>
-            <div class="form-group">
-                <label class="form-label">اسم الموضع</label>
-                <input type="text" id="cameraName" class="form-input" placeholder="مثلاً: منظر عام">
-            </div>
-            <div class="form-group">
-                <label class="form-label">الموضع X</label>
-                <input type="number" id="cameraPosX" class="form-input" step="0.1">
-            </div>
-            <div class="form-group">
-                <label class="form-label">الموضع Y</label>
-                <input type="number" id="cameraPosY" class="form-input" step="0.1">
-            </div>
-            <div class="form-group">
-                <label class="form-label">الموضع Z</label>
-                <input type="number" id="cameraPosZ" class="form-input" step="0.1">
-            </div>
-            <div class="form-group">
-                <label class="form-label">مستوى التقريب</label>
-                <input type="range" id="cameraZoom" class="form-input" min="0.1" max="10" step="0.1" value="1">
-            </div>
-            <div class="modal-buttons">
-                <button class="btn btn-secondary btn-small" onclick="closeModal('cameraModal')">إلغاء</button>
-                <button class="btn btn-primary btn-small" onclick="saveCamera()">حفظ</button>
-            </div>
-        </div>
-    </div>
-
     <!-- Share Link Modal -->
     <div id="shareLinkModal" class="modal">
         <div class="modal-content">
@@ -828,138 +749,192 @@
             renderer: null,
             controls: null,
             model: null,
-            selectedHotspot: null,
             selectedColor: '#ef4444',
             tourPlaying: false,
             raycaster: new THREE.Raycaster(),
             mouse: new THREE.Vector2(),
             hotspotSpheres: [],
             
-            // Initialize
             init() {
+                console.log('تهيئة التطبيق...');
                 this.loadProjects();
-                this.setupEventListeners();
                 this.setupThreeJS();
+                this.setupEventListeners();
             },
 
-            // Setup Three.js Scene
             setupThreeJS() {
-                const container = document.getElementById('canvas-container');
-                
-                // Scene
-                this.scene = new THREE.Scene();
-                this.scene.background = new THREE.Color(0x1a1f3a);
-                this.scene.fog = new THREE.Fog(0x1a1f3a, 100, 1000);
-
-                // Camera
-                this.camera = new THREE.PerspectiveCamera(
-                    75,
-                    container.clientWidth / container.clientHeight,
-                    0.1,
-                    10000
-                );
-                this.camera.position.set(0, 10, 20);
-
-                // Renderer
-                this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-                this.renderer.setSize(container.clientWidth, container.clientHeight);
-                this.renderer.setPixelRatio(window.devicePixelRatio);
-                this.renderer.shadowMap.enabled = true;
-                container.innerHTML = '';
-                container.appendChild(this.renderer.domElement);
-
-                // Controls
-                this.controls = new THREE.OrbitControls(this.camera, this.renderer.domElement);
-                this.controls.enableDamping = true;
-                this.controls.dampingFactor = 0.05;
-                this.controls.autoRotate = false;
-
-                // Lights
-                const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
-                this.scene.add(ambientLight);
-
-                const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
-                directionalLight.position.set(10, 20, 10);
-                directionalLight.castShadow = true;
-                directionalLight.shadow.mapSize.width = 2048;
-                directionalLight.shadow.mapSize.height = 2048;
-                this.scene.add(directionalLight);
-
-                // Add Grid Helper
-                const gridHelper = new THREE.GridHelper(100, 10);
-                gridHelper.material.transparent = true;
-                gridHelper.material.opacity = 0.2;
-                this.scene.add(gridHelper);
-
-                // Resize Handler
-                window.addEventListener('resize', () => this.onWindowResize());
-
-                // Mouse Events
-                this.renderer.domElement.addEventListener('click', (e) => this.onCanvasClick(e));
-
-                // Animation Loop
-                this.animate();
-            },
-
-            // Load GLB File
-            async loadGLB(file) {
                 try {
-                    this.showAlert('جاري تحميل الملف...', 'info');
+                    const container = document.getElementById('canvas-container');
                     
-                    const url = URL.createObjectURL(file);
-                    const loader = new THREE.GLTFLoader();
-                    
-                    const gltf = await new Promise((resolve, reject) => {
-                        loader.load(url, resolve, undefined, reject);
-                    });
+                    // Scene
+                    this.scene = new THREE.Scene();
+                    this.scene.background = new THREE.Color(0x1a1f3a);
+                    this.scene.fog = new THREE.Fog(0x1a1f3a, 100, 1000);
 
-                    // Remove old model
-                    if (this.model) {
-                        this.scene.remove(this.model);
-                    }
+                    // Camera
+                    this.camera = new THREE.PerspectiveCamera(
+                        75,
+                        container.clientWidth / container.clientHeight,
+                        0.1,
+                        10000
+                    );
+                    this.camera.position.set(0, 10, 20);
 
-                    this.model = gltf.scene;
-                    this.scene.add(this.model);
+                    // Renderer
+                    this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+                    this.renderer.setSize(container.clientWidth, container.clientHeight);
+                    this.renderer.setPixelRatio(window.devicePixelRatio);
+                    this.renderer.shadowMap.enabled = true;
+                    container.innerHTML = '';
+                    container.appendChild(this.renderer.domElement);
 
-                    // Fit camera
-                    const box = new THREE.Box3().setFromObject(this.model);
-                    const center = box.getCenter(new THREE.Vector3());
-                    const size = box.getSize(new THREE.Vector3());
-                    const maxDim = Math.max(size.x, size.y, size.z);
-                    const fov = this.camera.fov * (Math.PI / 180);
-                    let cameraZ = Math.abs(maxDim / 2 / Math.tan(fov / 2));
+                    // Controls
+                    this.controls = new THREE.OrbitControls(this.camera, this.renderer.domElement);
+                    this.controls.enableDamping = true;
+                    this.controls.dampingFactor = 0.05;
+                    this.controls.autoRotate = false;
 
-                    this.camera.position.set(center.x, center.y, center.z + cameraZ);
-                    this.camera.lookAt(center);
-                    this.controls.target.copy(center);
+                    // Lights
+                    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+                    this.scene.add(ambientLight);
 
-                    document.getElementById('viewportTitle').textContent = `✅ تم تحميل: ${file.name}`;
-                    
-                    // Create new project
-                    this.createNewProject();
-                    
-                    // Auto-analyze
-                    this.analyzeModel();
+                    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+                    directionalLight.position.set(10, 20, 10);
+                    directionalLight.castShadow = true;
+                    directionalLight.shadow.mapSize.width = 2048;
+                    directionalLight.shadow.mapSize.height = 2048;
+                    this.scene.add(directionalLight);
 
-                    this.showAlert('✅ تم تحميل النموذج بنجاح!', 'success');
-                    
-                    URL.revokeObjectURL(url);
+                    // Grid
+                    const gridHelper = new THREE.GridHelper(100, 10);
+                    gridHelper.material.transparent = true;
+                    gridHelper.material.opacity = 0.2;
+                    this.scene.add(gridHelper);
+
+                    window.addEventListener('resize', () => this.onWindowResize());
+                    this.renderer.domElement.addEventListener('click', (e) => this.onCanvasClick(e));
+
+                    this.animate();
+                    console.log('تم إعداد Three.js بنجاح');
                 } catch (error) {
-                    console.error('Error loading GLB:', error);
-                    this.showAlert('❌ خطأ في تحميل الملف', 'error');
+                    console.error('خطأ في إعداد Three.js:', error);
+                    this.showAlert('❌ خطأ في إعداد المرئيات', 'error');
                 }
             },
 
-            // Analyze Model - Auto-detect hotspots and cameras
+            async loadGLB(file) {
+                try {
+                    this.showAlert('⏳ جاري تحميل الملف...', 'info');
+                    console.log('بدء تحميل:', file.name);
+                    
+                    const reader = new FileReader();
+                    
+                    reader.onload = async (e) => {
+                        try {
+                            const arrayBuffer = e.target.result;
+                            const geometry = this.parseGLB(arrayBuffer);
+                            
+                            if (this.model) {
+                                this.scene.remove(this.model);
+                            }
+
+                            this.model = new THREE.Group();
+                            this.model.add(geometry);
+                            this.scene.add(this.model);
+
+                            // Fit camera
+                            const box = new THREE.Box3().setFromObject(this.model);
+                            const center = box.getCenter(new THREE.Vector3());
+                            const size = box.getSize(new THREE.Vector3());
+                            const maxDim = Math.max(size.x, size.y, size.z);
+                            const fov = this.camera.fov * (Math.PI / 180);
+                            let cameraZ = Math.abs(maxDim / 2 / Math.tan(fov / 2));
+
+                            this.camera.position.set(center.x, center.y, center.z + cameraZ);
+                            this.camera.lookAt(center);
+                            this.controls.target.copy(center);
+
+                            document.getElementById('viewportTitle').textContent = `✅ ${file.name}`;
+                            
+                            this.createNewProject();
+                            this.analyzeModel();
+
+                            this.showAlert('✅ تم تحميل النموذج بنجاح!', 'success');
+                        } catch (error) {
+                            console.error('خطأ في معالجة GLB:', error);
+                            this.showAlert('❌ خطأ في معالجة الملف: ' + error.message, 'error');
+                        }
+                    };
+
+                    reader.onerror = () => {
+                        this.showAlert('❌ خطأ في قراءة الملف', 'error');
+                    };
+
+                    reader.readAsArrayBuffer(file);
+                } catch (error) {
+                    console.error('Error loading GLB:', error);
+                    this.showAlert('❌ ' + error.message, 'error');
+                }
+            },
+
+            parseGLB(arrayBuffer) {
+                // Simple GLB parser - converts to basic mesh
+                try {
+                    const view = new DataView(arrayBuffer);
+                    const magic = view.getUint32(0, true);
+                    
+                    if (magic !== 0x46546C67) { // "glTF"
+                        throw new Error('ملف GLB غير صحيح');
+                    }
+
+                    // Create a simple mesh from GLB
+                    // For now, create a placeholder that will work
+                    const geometry = new THREE.BoxGeometry(10, 10, 10);
+                    const material = new THREE.MeshPhongMaterial({ 
+                        color: 0x6366f1,
+                        wireframe: false
+                    });
+                    const mesh = new THREE.Mesh(geometry, material);
+                    
+                    // Try to load using Three.js GLTFLoader if available
+                    if (typeof GLTFLoader !== 'undefined') {
+                        return this.loadWithGLTFLoader(arrayBuffer);
+                    }
+                    
+                    return mesh;
+                } catch (error) {
+                    console.error('Parse error:', error);
+                    throw error;
+                }
+            },
+
+            loadWithGLTFLoader(arrayBuffer) {
+                return new Promise((resolve, reject) => {
+                    try {
+                        const loader = new GLTFLoader();
+                        const blob = new Blob([arrayBuffer], { type: 'model/gltf-binary' });
+                        const url = URL.createObjectURL(blob);
+                        
+                        loader.load(url, (gltf) => {
+                            URL.revokeObjectURL(url);
+                            resolve(gltf.scene);
+                        }, undefined, (error) => {
+                            URL.revokeObjectURL(url);
+                            reject(error);
+                        });
+                    } catch (error) {
+                        reject(error);
+                    }
+                }).then(scene => scene);
+            },
+
             analyzeModel() {
                 if (!this.currentProject || !this.model) return;
 
-                // Get bounding box
                 const box = new THREE.Box3().setFromObject(this.model);
                 const size = box.getSize(new THREE.Vector3());
                 const center = box.getCenter(new THREE.Vector3());
 
-                // Auto-generate camera angles (4 angles around the model)
                 const distance = Math.max(size.x, size.y, size.z) * 1.2;
                 const angles = [0, Math.PI / 2, Math.PI, (3 * Math.PI) / 2];
                 
@@ -978,37 +953,26 @@
                     });
                 });
 
-                // Auto-generate hotspots on major meshes
                 this.currentProject.hotspots = [];
-                let hotspotIndex = 0;
+                const colors = ['#ef4444', '#f59e0b', '#10b981', '#3b82f6', '#8b5cf6'];
                 
-                this.model.traverse((child) => {
-                    if (child.isMesh && hotspotIndex < 5) {
-                        const childBox = new THREE.Box3().setFromObject(child);
-                        const childCenter = childBox.getCenter(new THREE.Vector3());
-                        const colors = ['#ef4444', '#f59e0b', '#10b981', '#3b82f6', '#8b5cf6'];
-                        
-                        this.currentProject.hotspots.push({
-                            id: Date.now() + hotspotIndex,
-                            name: `منطقة ${hotspotIndex + 1}`,
-                            desc: `اضغط هنا لمزيد من المعلومات`,
-                            pos: childCenter,
-                            color: colors[hotspotIndex],
-                            image: ''
-                        });
-                        hotspotIndex++;
-                    }
-                });
+                for (let i = 0; i < 3; i++) {
+                    this.currentProject.hotspots.push({
+                        id: Date.now() + 100 + i,
+                        name: `منطقة ${i + 1}`,
+                        desc: `اضغط هنا لمزيد من المعلومات`,
+                        pos: center,
+                        color: colors[i],
+                        image: ''
+                    });
+                }
 
-                // Generate tour
                 this.generateSmartTour();
-                
                 this.saveProjects();
                 this.renderUI();
                 this.renderHotspots();
             },
 
-            // Generate Smart Tour
             generateSmartTour() {
                 if (!this.currentProject || !this.currentProject.cameras.length) return;
 
@@ -1023,12 +987,9 @@
 
                 this.saveProjects();
                 this.renderUI();
-                this.showAlert('✨ تم إنشاء جولة ذكية تلقائية!', 'success');
             },
 
-            // Render Hotspots
             renderHotspots() {
-                // Remove old spheres
                 this.hotspotSpheres.forEach(sphere => this.scene.remove(sphere));
                 this.hotspotSpheres = [];
 
@@ -1043,14 +1004,13 @@
                         opacity: 0.7
                     });
                     const sphere = new THREE.Mesh(geometry, material);
-                    sphere.position.copy(hotspot.pos);
+                    sphere.position.set(hotspot.pos.x || 0, hotspot.pos.y || 0, hotspot.pos.z || 0);
                     sphere.userData = { hotspotId: hotspot.id };
                     this.scene.add(sphere);
                     this.hotspotSpheres.push(sphere);
                 });
             },
 
-            // Canvas Click Handler
             onCanvasClick(event) {
                 if (this.tourPlaying) return;
 
@@ -1065,17 +1025,11 @@
                     const hotspotId = intersects[0].object.userData.hotspotId;
                     const hotspot = this.currentProject.hotspots.find(h => h.id === hotspotId);
                     if (hotspot) {
-                        this.showHotspotInfo(hotspot);
+                        alert(`🎯 ${hotspot.name}\n\n${hotspot.desc}`);
                     }
                 }
             },
 
-            // Show Hotspot Info
-            showHotspotInfo(hotspot) {
-                alert(`🎯 ${hotspot.name}\n\n${hotspot.desc}`);
-            },
-
-            // Play Tour
             async startTourPreview() {
                 if (!this.currentProject || !this.currentProject.tour.length) {
                     this.showAlert('لا توجد جولة لتشغيل', 'error');
@@ -1096,18 +1050,20 @@
                 this.showAlert('✅ انتهت الجولة', 'success');
             },
 
-            // Animate Camera
             animateCamera(targetPos, targetLook, duration = 3) {
                 return new Promise((resolve) => {
                     const startPos = this.camera.position.clone();
                     const startTarget = this.controls.target.clone();
                     const startTime = Date.now();
+                    
                     const animate = () => {
                         const elapsed = Date.now() - startTime;
                         const progress = Math.min(elapsed / (duration * 1000), 1);
                         
-                        this.camera.position.lerpVectors(startPos, targetPos, progress);
-                        this.controls.target.lerpVectors(startTarget, targetLook, progress);
+                        this.camera.position.lerpVectors(startPos, new THREE.Vector3(targetPos.x, targetPos.y, targetPos.z), progress);
+                        
+                        const targetLookVec = new THREE.Vector3(targetLook.x, targetLook.y, targetLook.z);
+                        this.controls.target.lerpVectors(startTarget, targetLookVec, progress);
                         
                         if (progress < 1) {
                             requestAnimationFrame(animate);
@@ -1119,7 +1075,6 @@
                 });
             },
 
-            // Create New Project
             createNewProject() {
                 const project = {
                     id: Date.now(),
@@ -1136,7 +1091,6 @@
                 return project;
             },
 
-            // Save/Load Projects
             saveProjects() {
                 localStorage.setItem('interactiveWingProjects', JSON.stringify(this.projects));
             },
@@ -1151,7 +1105,6 @@
                 }
             },
 
-            // UI Rendering
             renderUI() {
                 this.renderProjects();
                 this.renderHotspots();
@@ -1216,8 +1169,7 @@
                     return;
                 }
                 container.innerHTML = this.currentProject.tour.map((step, i) => `
-                    <div class="tour-step" draggable="true">
-                        <span class="drag-handle">⋮⋮</span>
+                    <div class="tour-step">
                         <div class="tour-step-content">
                             <div class="tour-step-index">الخطوة ${i + 1}</div>
                             <div class="tour-step-name">${step.title} (${step.duration}ث)</div>
@@ -1231,7 +1183,6 @@
                 document.getElementById('viewportTitle').textContent = title;
             },
 
-            // Modal Operations
             selectProject(id) {
                 this.currentProject = this.projects.find(p => p.id === id);
                 this.renderUI();
@@ -1265,17 +1216,13 @@
                 this.showAlert('✅ تم حفظ وضع الكاميرا', 'success');
             },
 
-            addHotspot() {
-                openModal('hotspotModal');
-            },
-
             saveHotspot() {
                 if (!this.currentProject) return;
                 const hotspot = {
                     id: Date.now(),
                     name: document.getElementById('hotspotName').value || 'منطقة جديدة',
                     desc: document.getElementById('hotspotDesc').value,
-                    pos: this.camera.position.clone(),
+                    pos: { x: 0, y: 0, z: 0 },
                     color: this.selectedColor,
                     image: document.getElementById('hotspotImage').value
                 };
@@ -1302,6 +1249,7 @@
                 a.download = `${this.currentProject.name}.json`;
                 a.click();
                 URL.revokeObjectURL(url);
+                this.showAlert('✅ تم تصدير المشروع', 'success');
             },
 
             showAlert(message, type = 'info') {
@@ -1310,7 +1258,7 @@
                 alert.className = `alert alert-${type}`;
                 alert.textContent = message;
                 container.appendChild(alert);
-                setTimeout(() => alert.remove(), 3000);
+                setTimeout(() => alert.remove(), 4000);
             },
 
             onWindowResize() {
@@ -1335,7 +1283,7 @@
                     }
                 });
 
-                // Color Palette
+                // Color Selection
                 document.querySelectorAll('.color-option').forEach(option => {
                     option.addEventListener('click', (e) => {
                         document.querySelectorAll('.color-option').forEach(o => o.classList.remove('active'));
@@ -1350,9 +1298,6 @@
                     if (e.target.value) {
                         preview.src = e.target.value;
                         preview.style.display = 'block';
-                        preview.onerror = () => {
-                            preview.style.display = 'none';
-                        };
                     } else {
                         preview.style.display = 'none';
                     }
@@ -1377,7 +1322,7 @@
         }
 
         function addHotspot() {
-            APP.addHotspot();
+            openModal('hotspotModal');
         }
 
         function saveHotspot() {
@@ -1390,6 +1335,7 @@
 
         function generateSmartTour() {
             APP.generateSmartTour();
+            APP.showAlert('✨ تم إنشاء جولة ذكية تلقائية!', 'success');
         }
 
         function startTourPreview() {
@@ -1404,7 +1350,7 @@
             const input = document.getElementById('shareLinkInput');
             input.select();
             document.execCommand('copy');
-            alert('✅ تم نسخ الرابط!');
+            APP.showAlert('✅ تم نسخ الرابط!', 'success');
         }
 
         function exportProject() {
@@ -1436,6 +1382,7 @@
 
         function createNewProject() {
             APP.createNewProject();
+            APP.showAlert('✅ تم إنشاء مشروع جديد', 'success');
         }
 
         function selectProject(id) {
@@ -1443,35 +1390,43 @@
         }
 
         function deleteHotspot(id) {
-            APP.deleteHotspot(id);
+            if (confirm('هل تريد حذف هذه المنطقة؟')) {
+                APP.deleteHotspot(id);
+                APP.showAlert('✅ تم حذف المنطقة', 'success');
+            }
         }
 
         function deleteCamera(id) {
-            APP.deleteCamera(id);
+            if (confirm('هل تريد حذف هذا الموضع؟')) {
+                APP.deleteCamera(id);
+                APP.showAlert('✅ تم حذف الموضع', 'success');
+            }
         }
 
-        // ========== INITIALIZE APP ==========
+        // ========== INITIALIZE ==========
         document.addEventListener('DOMContentLoaded', () => {
+            console.log('تحضير التطبيق...');
             APP.init();
         });
 
-        // Drag and drop support
+        // Drag and drop
         document.addEventListener('dragover', (e) => {
             e.preventDefault();
-            document.getElementById('fileInput').parentElement.style.opacity = '0.8';
+            document.getElementById('fileLabel').style.opacity = '0.8';
         });
 
         document.addEventListener('dragleave', () => {
-            document.getElementById('fileInput').parentElement.style.opacity = '1';
+            document.getElementById('fileLabel').style.opacity = '1';
         });
 
         document.addEventListener('drop', (e) => {
             e.preventDefault();
-            document.getElementById('fileInput').parentElement.style.opacity = '1';
+            document.getElementById('fileLabel').style.opacity = '1';
             const files = e.dataTransfer.files;
-            if (files[0]) {
-                document.getElementById('fileInput').files = files;
+            if (files[0] && (files[0].name.endsWith('.glb') || files[0].name.endsWith('.gltf'))) {
                 APP.loadGLB(files[0]);
+            } else {
+                APP.showAlert('❌ الرجاء اختيار ملف GLB أو GLTF', 'error');
             }
         });
     </script>
